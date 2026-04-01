@@ -29,46 +29,92 @@ $(document).ready(function() {
         }
     });
 
-    // 3. Manejo funcional básico del Formulario "Buscador"
-    $('#searchForm').on('submit', function(e) {
-        e.preventDefault(); // Previene envío global
-        
-        // Obtener datos
-        var ubicacion = $('#ubicacion').val();
+    // 2.1 Rotación dinámica de placeholders para el buscador
+    const locationExamples = [
+        "Mansión en Santa Fe",
+        "Apartamento en Itagüí",
+        "Casa en Medellín",
+        "Penthouse en El Poblado",
+        "Lote en Llano Grande",
+        "Apartaestudio en Laureles"
+    ];
+
+    let currentIdx = 0;
+    const $ubicacionInput = $('#ubicacionInput');
+
+    if ($ubicacionInput.length) {
+        setInterval(() => {
+            currentIdx = (currentIdx + 1) % locationExamples.length;
+            $ubicacionInput.attr('placeholder', `Ej: ${locationExamples[currentIdx]}`);
+        }, 2500);
+    }
+
+    // 3. Manejo funcional del Formulario (Búsqueda en Vivo)
+    function filterProperties() {
+        var ubicacion = $('#ubicacionInput').val().toLowerCase().trim();
         var tipo = $('#tipo').val();
         var hab = $('#habitaciones').val();
-        var precio = $('#precio').val();
-        var btn = $(this).find('button[type="submit"]');
+        var precioMaximo = $('#precio').val();
 
-        // Reset anterior
+        var matchesFound = 0;
+
+        $('.property-item').each(function() {
+            var item = $(this);
+            var itemUbicacion = item.data('ubicacion').toString().toLowerCase();
+            var itemTipo = item.data('tipo').toString();
+            var itemHabitaciones = parseInt(item.data('habitaciones'));
+            var itemPrecio = parseInt(item.data('precio'));
+
+            var isMatch = true;
+
+            // 1. Filtro Ubicación (búsqueda en vivo de subcadenas)
+            if (ubicacion !== "" && !itemUbicacion.includes(ubicacion)) {
+                isMatch = false;
+            }
+
+            // 2. Filtro Tipo
+            if (tipo !== "" && itemTipo !== tipo) {
+                isMatch = false;
+            }
+
+            // 3. Filtro Habitaciones
+            if (hab !== "todas" && itemHabitaciones < parseInt(hab)) {
+                isMatch = false;
+            }
+
+            // 4. Filtro Precio
+            if (precioMaximo !== "ilimitado" && itemPrecio > parseInt(precioMaximo)) {
+                isMatch = false;
+            }
+
+            // Mostrar u ocultar
+            if (isMatch) {
+                item.removeClass('d-none');
+                matchesFound++;
+            } else {
+                item.addClass('d-none');
+            }
+        });
+
+        // Feedback al usuario
         var $feedback = $('#search-feedback');
-        $feedback.removeClass('d-none alert-success alert-danger').empty();
-
-        // Validar mínimos requeridos
-        if(ubicacion === "" || tipo === "") {
-            $feedback.addClass('alert alert-danger').text('Por favor, selecciona al menos Ubicación y Tipo de Inmueble.').removeClass('d-none');
-            return;
+        $feedback.removeClass('d-none alert-success alert-danger alert-info').empty();
+        if (matchesFound > 0) {
+            $feedback.addClass('alert alert-success d-block').html(`¡Encontramos ${matchesFound} propiedad(es)!`);
+        } else {
+            $feedback.addClass('alert alert-info d-block').html('No encontramos propiedades. Intenta cambiar los filtros.');
         }
+    }
 
-        // Simular llamada a API / Backend (Efecto loading)
-        btn.prop('disabled', true).html('Buscando <i class="fa fa-spinner fa-spin ml-2"></i>');
+    // Escuchar eventos de teclado y cambios en el form
+    $('#ubicacionInput').on('input', filterProperties);
+    $('#tipo, #habitaciones, #precio').on('change', filterProperties);
 
-        setTimeout(function() {
-            // Mostrar los datos capturados en consola como pidió el user
-            var searchData = {
-                "ubicacion": ubicacion,
-                "tipoInmueble": tipo,
-                "habitaciones": hab,
-                "precio_maximo": precio
-            };
-            console.log("Datos capturados del buscador:", searchData);
-
-            // Mensaje UI de simulación de éxito
-            $feedback.addClass('alert alert-success d-block').html('Búsqueda procesada. Revisa la consola para los datos. <br> (Se integrarían los resultados aquí)');
-            
-            // Restaurar estilo botón
-            btn.prop('disabled', false).html('Buscar <i class="fa fa-search ml-2"></i>');
-        }, 1200);
+    $('#searchForm').on('submit', function(e) {
+        e.preventDefault();
+        $('html, body').animate({
+            scrollTop: $("#destacadas").offset().top - 70
+        }, 800);
     });
 
 
