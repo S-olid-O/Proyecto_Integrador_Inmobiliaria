@@ -116,6 +116,5 @@ $(document).ready(function() {
             scrollTop: $("#destacadas").offset().top - 70
         }, 800);
     });
-
-
-});
+    
+})(jQuery);
