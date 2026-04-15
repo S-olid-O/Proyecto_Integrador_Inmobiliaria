@@ -9801,6 +9801,11 @@ h6,
     width: auto !important;
 }
 
+#link-profile {
+    text-align: right;
+    margin-top: 10px;
+}
+
 /* --- ESTILOS INMOBILIARIA PREMIUM (v3 - Nueva Paleta) --- */
 :root {
     --color-beige-claro: #F2F0E9;
