@@ -9795,6 +9795,11 @@ h6,
   display: flex;
   justify-content: center;
 }
+.login button{
+    margin: 0 auto;
+    display: block;
+    width: auto !important;
+}
 
 /* --- ESTILOS INMOBILIARIA PREMIUM (v3 - Nueva Paleta) --- */
 :root {
