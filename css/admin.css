@@ -1,0 +1,138 @@
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #f4f7fb;
+    color: #334155;
+    min-height: 100vh;
+    margin: 0;
+    padding: 3rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+.dashboard-container {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    width: 100%;
+    max-width: 1050px;
+    border: 1px solid #e2e8f0;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f1f5f9;
+}
+.header h2 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+}
+.header h2 i {
+    color: #3b82f6;
+    margin-right: 12px;
+    font-size: 1.6rem;
+}
+.btn-home {
+    background: #ffffff;
+    color: #475569;
+    text-decoration: none;
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.btn-home:hover {
+    background: #f8fafc;
+    color: #0f172a;
+    border-color: #cbd5e1;
+}
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+th {
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    color: #64748b;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 2px solid #e2e8f0;
+    background: #f8fafc;
+}
+th:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+th:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+
+td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+    color: #334155;
+    vertical-align: middle;
+}
+tr:last-child td {
+    border-bottom: none;
+}
+tr:hover td {
+    background: #f8fafc;
+}
+.badge {
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-block;
+    letter-spacing: 0.3px;
+    text-transform: capitalize;
+}
+.badge.comprador {
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+}
+.badge.vendedor {
+    background: #fdf2f8;
+    color: #db2777;
+    border: 1px solid #fbcfe8;
+}
+.badge.default {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+}
+.loading {
+    text-align: center;
+    padding: 4rem;
+    color: #94a3b8;
+    font-size: 1.1rem;
+}
+.btn-delete {
+    background: #fee2e2;
+    color: #ef4444;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 0.5rem 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.btn-delete:hover {
+    background: #f87171;
+    color: #fff;
+    border-color: #ef4444;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}

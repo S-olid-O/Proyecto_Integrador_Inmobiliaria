@@ -1,7 +1,7 @@
 //este es el js de la base de datos, aca estan toda las apis y lo que se requiere para que la base de datos funcione bien
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, doc, setDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC_R9dW12aW4-1-FsOeuwXmKOqccWGl7M8",
@@ -25,11 +25,21 @@ export const registrarUsuarioCompleto = async (email, pass, datosExtra) => {
         nombre: datosExtra.nombre,
         cedula: datosExtra.cedula,
         fechaNacimiento: datosExtra.fecha,
-        email: email
+        email: email,
+        rol: datosExtra.rol || 'No especificado'
     });
     return user;
 };
 
 export const iniciarSesion = (email, pass) => {
     return signInWithEmailAndPassword(auth, email, pass);
+};
+
+export const obtenerUsuarios = async () => {
+    const querySnapshot = await getDocs(collection(db, "usuarios"));
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+};
+
+export const eliminarUsuario = async (userId) => {
+    await deleteDoc(doc(db, "usuarios", userId));
 };
