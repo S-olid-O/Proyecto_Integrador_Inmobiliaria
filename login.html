@@ -2,118 +2,53 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Acceso Inmobiliaria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Inmobiliaria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link href="css/style.css" rel="stylesheet">
-    <style>
-        .hidden { display: none; }
-        .card { border-radius: 15px; border: none; }
-        .btn-toggle { color: #007bff; cursor: pointer; text-decoration: underline; }
-    </style>
+    <link rel="stylesheet" href="css/login.css">
 </head>
-<body class="bg-light">
-
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow p-4">
-                    <h2 id="form-title" class="text-center mb-4">Crear Cuenta</h2>
-                    
-                    <form id="auth-form">
-                        <div id="extra-fields">
-                            <div class="form-group">
-                                <label>Nombre Completo</label>
-                                <input type="text" class="form-control" id="reg-name" placeholder="Ej: Juan Pérez">
-                            </div>
-                            <div class="form-group">
-                                <label>Cédula</label>
-                                <input type="text" class="form-control" id="reg-id" placeholder="Documento de identidad">
-                            </div>
-                            <div class="form-group">
-                                <label>Fecha de Nacimiento</label>
-                                <input type="date" class="form-control" id="reg-birth">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Correo Electrónico</label>
-                            <input type="email" class="form-control" id="auth-email" placeholder="correo@ejemplo.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Contraseña</label>
-                            <input type="password" class="form-control" id="auth-pass" placeholder="Mínimo 6 caracteres" required>
-                        </div>
-
-                        <button type="submit" id="btn-main" class="btn btn-primary btn-block">Registrarse Ahora</button>
-                    </form>
-                    <P id="link-profile">¿Ya tienes cuenta? <a href="profiles.html">Inicia Sesión</a></P> 
+<body>
+    <div class="premium-card text-center">
+        <img src="img/LOGOV2.png" alt="Logo" class="logo">
+        <h2 class="mb-4 font-weight-bold" style="color: #2c3e50;">Crea tu Cuenta</h2>
+        
+        <form id="register-form">
+            <div class="d-flex justify-content-between mb-4">
+                <button type="button" class="btn role-btn comprador-btn" data-role="Comprador">Soy Comprador</button>
+                <button type="button" class="btn role-btn vendedor-btn" data-role="Vendedor">Soy Vendedor</button>
+            </div>
+            
+            <input type="hidden" id="user-role" required>
+            
+            <div class="form-row text-left">
+                <div class="col-12 mb-3">
+                    <label>Nombre Completo</label>
+                    <input type="text" class="form-control" id="reg-name" placeholder="Tu nombre" required>
+                </div>
+                <div class="col-6 mb-3">
+                    <label>Cédula</label>
+                    <input type="text" class="form-control" id="reg-id" placeholder="Documento" required>
+                </div>
+                <div class="col-6 mb-3">
+                    <label>Nacimiento</label>
+                    <input type="date" class="form-control" id="reg-birth" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <label>Correo Electrónico</label>
+                    <input type="email" class="form-control" id="reg-email" placeholder="correo@ejemplo.com" required>
+                </div>
+                <div class="col-12 mb-4">
+                    <label>Contraseña</label>
+                    <input type="password" class="form-control" id="reg-pass" placeholder="Mínimo 6 caracteres" required>
                 </div>
             </div>
-        </div>
+            
+            <button type="submit" class="btn btn-register btn-block">Registrarme</button>
+            <p class="mt-3 text-muted" style="font-size: 0.9rem;">¿Ya tienes cuenta? <a href="profiles.html" style="color: #1976d2; font-weight: 600;">Inicia Sesión</a></p>
+        </form>
     </div>
-    
 
-    <script type="module">
-        // Si va a tocar este codigo hagalo con cuidado, es la base de datos
-        import { registrarUsuarioCompleto, iniciarSesion } from './js/auth.js';
-
-        let isRegisterMode = true; // Por default empieza en la pagina de registro
-
-        const extraFields = document.getElementById('extra-fields'); // importar variables iniciales
-        const formTitle = document.getElementById('form-title');
-        const btnMain = document.getElementById('btn-main');
-        const toggleText = document.getElementById('toggle-text');
-
-        // FUNCIÓN PARA CAMBIAR ENTRE REGISTRO Y LOGIN
-        document.getElementById('switch-to-login').addEventListener('click', function() {
-            isRegisterMode = !isRegisterMode;
-
-            if (isRegisterMode) {
-                formTitle.innerText = "Crear Cuenta";
-                btnMain.innerText = "Registrarse Ahora";
-                extraFields.classList.remove('hidden');
-                toggleText.innerHTML = '¿Ya tienes cuenta? <span class="btn-toggle" id="switch-to-login">Inicia Sesión</span>';
-            } else {
-                formTitle.innerText = "Iniciar Sesión";
-                btnMain.innerText = "Entrar";
-                extraFields.classList.add('hidden');
-                toggleText.innerHTML = '¿No tienes cuenta? <span class="btn-toggle" id="switch-to-login">Regístrate</span>';
-            }
-            // Interuptor para cambiar entre registro y login
-            document.getElementById('switch-to-login').onclick = () => document.getElementById('switch-to-login').click();
-        });
-
-        // LÓGICA DEL FORMULARIO
-        document.getElementById('auth-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('auth-email').value; // captura los datos y evita que la pagina se recarge sola, para no perder todo
-            const pass = document.getElementById('auth-pass').value;
-
-            if (isRegisterMode) {
-                // MODO REGISTRO
-                const nombre = document.getElementById('reg-name').value;
-                const cedula = document.getElementById('reg-id').value;
-                const fecha = document.getElementById('reg-birth').value;
-
-                if (!nombre || !cedula || !fecha) { //Verifica que todos los datos esten, en caso de que falte alguno el registro no sera exitoso
-                    alert("Completa todos los campos para el registro.");
-                    return;
-                }
-
-                try {
-                    await registrarUsuarioCompleto(email, pass, { nombre, cedula, fecha });
-                    alert("Registro exitoso.");
-                    window.location.href = 'home.html';
-                } catch (err) { alert("Error: " + err.message); }
-
-            } else {
-                // MODO LOGIN
-                try {
-                    await iniciarSesion(email, pass); //en login solo puse para que se ponga el correo y la contraseña, ya que los otros datos ya los tenemos entonces no son necesarios volver a pedirlos
-                    window.location.href = 'home.html';
-                } catch (err) { alert("Correo o contraseña incorrectos."); }
-            }
-        });
-    </script>
+    <script type="module" src="js/login.js"></script>
 </body>
 </html>
