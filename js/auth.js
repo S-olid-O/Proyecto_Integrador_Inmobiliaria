@@ -1,6 +1,15 @@
 //este es el js de la base de datos, aca estan toda las apis y lo que se requiere para que la base de datos funcione bien
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updatePassword,
+    reauthenticateWithCredential,
+    EmailAuthProvider,
+    deleteUser,
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -42,4 +51,41 @@ export const obtenerUsuarios = async () => {
 
 export const eliminarUsuario = async (userId) => {
     await deleteDoc(doc(db, "usuarios", userId));
+};
+
+// ============================================
+// FUNCIONES PARA GESTIÓN DE SEGURIDAD
+// ============================================
+
+// Exportar instancia de auth para uso en otros módulos
+export { getAuth };
+
+// Función para cambiar contraseña
+export const cambiarPassword = async (currentPassword, newPassword) => {
+    const user = auth.currentUser;
+    if (!user) throw new Error('Usuario no autenticado');
+
+    // Reautenticar
+    const credential = EmailAuthProvider.credential(user.email, currentPassword);
+    await reauthenticateWithCredential(user, credential);
+
+    // Cambiar contraseña
+    await updatePassword(user, newPassword);
+};
+
+// Función para eliminar cuenta
+export const eliminarCuentaUsuario = async () => {
+    const user = auth.currentUser;
+    if (!user) throw new Error('Usuario no autenticado');
+
+    // Eliminar datos del usuario de Firestore
+    await deleteDoc(doc(db, "usuarios", user.uid));
+
+    // Eliminar cuenta de Firebase Auth
+    await deleteUser(user);
+};
+
+// Función para cerrar sesión
+export const cerrarSesion = async () => {
+    await signOut(auth);
 };
