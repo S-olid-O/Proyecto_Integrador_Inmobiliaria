@@ -8,9 +8,10 @@ import {
     reauthenticateWithCredential,
     EmailAuthProvider,
     deleteUser,
-    signOut
+    signOut,
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, doc, setDoc, collection, getDocs, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC_R9dW12aW4-1-FsOeuwXmKOqccWGl7M8",
@@ -48,6 +49,25 @@ export const obtenerUsuarios = async () => {
     const querySnapshot = await getDocs(collection(db, "usuarios"));
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };
+
+export const verificarEstadoSesion = (callback) => {
+    onAuthStateChanged(auth, (user) => {
+        callback(user);
+    });
+};
+
+export const obtenerUsuarioActual = async () => {
+    const user = auth.currentUser;
+    if (user) {
+        const userDoc = await getDoc(doc(db, "usuarios", user.uid));
+        if (userDoc.exists()) {
+            return { id: user.uid, ...userDoc.data() };
+        }
+    }
+    return null;
+};
+
+
 
 export const eliminarUsuario = async (userId) => {
     await deleteDoc(doc(db, "usuarios", userId));

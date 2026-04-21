@@ -243,6 +243,34 @@
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
+    <script type="module">
+        import { verificarEstadoSesion, obtenerUsuarioActual } from './js/auth.js';
+
+        const loginBtn = document.querySelector('.btn-cta');
+
+        verificarEstadoSesion(async (user) => {
+            if (user) {
+                // Usuario logueado: cambiar a "Administrar Cuenta"
+                loginBtn.textContent = 'Administrar Cuenta';
+                loginBtn.onclick = async (e) => {
+                    e.preventDefault();
+                    const userData = await obtenerUsuarioActual();
+                    if (userData && userData.rol === 'Comprador') {
+                        window.location.href = 'buyer.html';
+                    } else if (userData && userData.rol === 'Vendedor') {
+                        window.location.href = 'seller.html';
+                    } else {
+                        window.location.href = 'profiles.html'; // fallback
+                    }
+                };
+            } else {
+                // No logueado: mantener "Inicia sesión"
+                loginBtn.textContent = 'Inicia sesión';
+                loginBtn.href = 'profiles.html';
+                loginBtn.onclick = null; // remove onclick
+            }
+        });
+    </script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

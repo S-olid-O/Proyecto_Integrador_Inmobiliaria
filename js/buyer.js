@@ -24,6 +24,22 @@ function inicializarMenuSidebar() {
         item.addEventListener('click', function(e) {
             e.preventDefault();
 
+            // Si es cerrar sesión, manejar diferente
+            if (this.textContent.trim() === 'Cerrar Sesión') {
+                if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                    // Usar Firebase signOut
+                    import('https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js').then(({ getAuth, signOut }) => {
+                        const auth = getAuth();
+                        signOut(auth).then(() => {
+                            window.location.href = 'home.html';
+                        }).catch((error) => {
+                            console.error('Error al cerrar sesión:', error);
+                        });
+                    });
+                }
+                return;
+            }
+
             // Remover clase active de todos los items
             menuItems.forEach(m => m.classList.remove('active'));
             formCards.forEach(form => form.style.display = 'none');
