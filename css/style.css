@@ -10190,8 +10190,8 @@ p, .text-muted, .text-white-50 {
     color: #ffffff !important;
 }
 .btn-primary:hover, .bg-primary:hover {
-    background-color: black !important;
-    border-color: blue !important;
+    background-color: #3f9462 !important;
+    border-color: #3f9462 !important;
 }
 
 .text-primary, .navbar-brand i {
