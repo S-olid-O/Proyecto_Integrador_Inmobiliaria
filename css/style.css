@@ -10190,8 +10190,8 @@ p, .text-muted, .text-white-50 {
     color: #ffffff !important;
 }
 .btn-primary:hover, .bg-primary:hover {
-    background-color: #3f9462 !important;
-    border-color: #3f9462 !important;
+    background-color: black !important;
+    border-color: blue !important;
 }
 
 .text-primary, .navbar-brand i {
@@ -10363,7 +10363,7 @@ p, .text-muted, .text-white-50 {
     background-color: var(--color-verde-corporativo) !important;
 }
 .submit-btn:hover {
-    background-color: #3f9462 !important;
+    background-color: black !important;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(78, 180, 120, 0.3) !important;
 }
