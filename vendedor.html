@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
     <!-- Bootstrap -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.ven.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -41,42 +44,47 @@
             <p class="text-white mb-5 shadow-text lead w-75 mx-auto" style="font-size: 1.25rem;">Conectamos tus sueños con las mejores ubicaciones</p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-            <div class="card p-4 shadow-sm">
-                <h5 class="card-title mb-3">Publicar Nueva Casa</h5>
-                <form id="formCasa">
-                    <div class="mb-3">
-                        <label class="form-label">Dirección</label>
-                        <input type="text" id="direccion" class="form-control" placeholder="Ej: Calle 10 #45-20" required>
+
+    <div class="container mt-5 pt-5"> 
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card card-publicar p-4 shadow-sm border-0">
+                    <h2 class="mb-4">Publicar Nueva Casa</h2>
+                    <form id="formCasa">
+                        <div class="mb-3">
+                            <label class="form-label">Dirección</label>
+                            <input type="text" id="direccion" class="form-input" placeholder="Ej: Calle 10 #45-20" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ubicación (Ciudad/Sector)</label>
+                            <input type="text" id="ubicacion" class="form-input" placeholder="Ej: Medellín, Poblado" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Precio ($)</label>
+                            <input type="number" id="precio" class="form-input" placeholder="0.00" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Descripción</label>
+                            <textarea id="descripcion" class="form-input" rows="3" placeholder="Detalles de la casa..."></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Foto de la Propiedad</label>
+                            <div class="form-input-file">
+                                <input type="file" id="foto" class="form-control-file" accept="image/*" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-publicar">Publicar Propiedad</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <h3 class="font-weight-bold mb-4" style="color: #0f172a;">Catálogo de Propiedades</h3>
+                <div id="listaCasas" class="row">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Ubicación (Ciudad/Sector)</label>
-                        <input type="text" id="ubicacion" class="form-control" placeholder="Ej: Medellín, Poblado" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Precio ($)</label>
-                        <input type="number" id="precio" class="form-control" placeholder="0.00" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Descripción</label>
-                        <textarea id="descripcion" class="form-control" rows="3" placeholder="Detalles de la casa..."></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Foto de la Propiedad</label>
-                        <input type="file" id="foto" class="form-control" accept="image/*" required>
-                    </div>
-                    <button type="submit" class="btn btn-dark w-100">Publicar Propiedad</button>
-                </form>
             </div>
         </div>
-
-        <div class="col-lg-8">
-            <div id="listaCasas" class="row">
-                </div>
-        </div>
     </div>
-</div>
 
 <footer class="real-estate-footer pt-5" id="contacto">
         <div class="container pt-4 pb-3">

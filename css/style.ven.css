@@ -1,0 +1,134 @@
+:root {
+    --verde-manuela: #2196f3;      
+    --verde-hover: #2196f3;        
+    --azul-oscuro: #0f172a;        
+    --gris-fondo: #f8fafc;         
+    --borde-suave: #e2e8f0;        
+    --sombra-card: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+
+.card-publicar {
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+    border-radius: 25px;           
+    box-shadow: var(--sombra-card);
+    padding: 35px;
+    max-width: 450px;
+    margin: 20px auto;
+}
+
+
+.card-publicar h2 {
+    color: var(--azul-oscuro);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+
+.form-label {
+    display: block;
+    font-weight: 700;
+    color: var(--verde-manuela);  
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    text-transform: uppercase;     
+    letter-spacing: 0.5px;
+}
+
+.form-input {
+    width: 100%;
+    background-color: var(--gris-fondo);
+    border: 2px solid var(--borde-suave);
+    border-radius: 12px;       
+    padding: 14px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: #4a5568;
+    transition: all 0.3s ease;
+    box-sizing: border-box;        
+}
+
+.form-input:focus {
+    background-color: #ffffff;
+    border-color: var(--verde-manuela);
+    outline: none;
+    box-shadow: 0 0 0 4px #2196f3;
+}
+
+
+.btn-publicar {
+    background-color: var(--verde-manuela) !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 50px;          
+    padding: 16px 30px;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    text-align: center;
+    box-shadow: 0 4px 12px #2196f3;
+}
+
+.btn-publicar:hover {
+    background-color: var(--verde-hover) !important;
+    transform: translateY(-2px);  
+    box-shadow: 0 6px 20px #2196f3;
+}
+
+
+.form-input-file {
+    border: 2px dashed var(--verde-manuela);
+    background-color: #f0fdf4;     
+    border-radius: 12px;
+    padding: 20px;
+    color: var(--verde-manuela);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.form-input-file:hover {
+    background-color: #dcfce7;
+}
+.card-publicar {
+    
+    
+    margin-top: 50px !important; 
+    margin-bottom: 50px;         
+    margin-left: auto;          
+    margin-right: auto;          
+}
+
+
+.hero-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: 400px !important; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.real-estate-footer {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #1a1a1a; 
+}
+
